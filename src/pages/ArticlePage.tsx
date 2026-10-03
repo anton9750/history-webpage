@@ -15,7 +15,7 @@ const Pager = styled.nav`display: flex; justify-content: space-between; gap: 1re
 export default function ArticlePage() {
   const { id } = useParams()
   const i = articles.findIndex((a) => a.id === id)
-  useEffect(() => window.scrollTo(0, 0), [id])
+  useEffect(() => { window.scrollTo(0, 0) }, [id])
 
   if (i === -1) return (<Page><Title>Article not found</Title><p>That article doesn’t exist. <Link to="/read">Back to the library</Link></p></Page>)
   const a = articles[i], prev = articles[i - 1], next = articles[i + 1]
