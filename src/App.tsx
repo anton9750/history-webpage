@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Layout, Protected } from './partials/Layout'
 import Home from './pages/Home'
 import Read from './pages/Read'
+import ArticlePage from './pages/ArticlePage'
 import Characters from './pages/Characters'
 import Images from './pages/Images'
 import Contact from './pages/Contact'
@@ -15,6 +16,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="read" element={<Read />} />
+        <Route path="read/:id" element={<ArticlePage />} />
         <Route path="characters" element={<Characters />} />
         <Route path="images" element={<Images />} />
         <Route path="contact" element={<Contact />} />
