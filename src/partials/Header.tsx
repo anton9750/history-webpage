@@ -3,11 +3,13 @@ import { NavLink, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { down } from '../utils/media'
 import { useAuth } from '../context/AuthContext'
+import { useThemeMode } from '../context/ThemeModeContext'
 
 const Bar = styled.header`
   position: sticky; top: 0; z-index: 50; height: ${({ theme }) => theme.headerH};
   display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem;
-  background: rgba(26,14,23,.92); backdrop-filter: blur(8px); border-bottom: 1px solid ${({ theme }) => theme.colors.line};
+  background: ${({ theme }) => theme.colors.overlay}; backdrop-filter: blur(8px);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.line};
 `
 const Logo = styled(Link)`font-family: ${({ theme }) => theme.fonts.display}; font-size: 1.5rem; font-weight: 800;`
 const Burger = styled.button`
@@ -24,11 +26,17 @@ const Nav = styled.nav<{ $open: boolean }>`
     display: ${({ $open }) => ($open ? 'flex' : 'none')};
   }
 `
+const ModeBtn = styled.button`
+  background: none; cursor: pointer; border-radius: 999px; padding: .3rem .9rem;
+  border: 1px solid ${({ theme }) => theme.colors.line}; color: ${({ theme }) => theme.colors.text};
+  &:hover { border-color: ${({ theme }) => theme.colors.orange}; }
+`
 const links = [['/', 'Home'], ['/read', 'Read'], ['/characters', 'Characters'], ['/images', 'Images'], ['/contact', 'Contact']]
 
 export default function Header() {
   const [open, setOpen] = useState(false)
   const { user } = useAuth()
+  const { mode, toggle } = useThemeMode()
   return (
     <Bar>
       <Logo to="/">Chronicle</Logo>
@@ -36,6 +44,9 @@ export default function Header() {
       <Nav $open={open} onClick={() => setOpen(false)}>
         {links.map(([to, label]) => <NavLink key={to} to={to} end={to === '/'}>{label}</NavLink>)}
         <NavLink to={user ? '/dashboard' : '/login'}>{user ? 'My space' : 'Log in'}</NavLink>
+        <ModeBtn onClick={toggle} aria-label={`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`}>
+          {mode === 'dark' ? '☀ Light' : '☾ Dark'}
+        </ModeBtn>
       </Nav>
     </Bar>
   )

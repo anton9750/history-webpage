@@ -12,12 +12,13 @@ const Img = styled.img`
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(.6) brightness(.75);
   transition: filter .5s, transform .8s;
 `
+// Labels sit on top of photos, so they keep fixed light-on-dark colours in both modes.
 const Label = styled.div`
   position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 1.2rem .8rem; text-align: center;
   background: linear-gradient(transparent, rgba(26,14,23,.92)); opacity: 0; transform: translateY(28px);
   transition: opacity .45s, transform .45s;
-  b { display: block; font: 800 1.15rem ${({ theme }) => theme.fonts.display}; color: ${({ theme }) => theme.colors.orange}; }
-  small { color: ${({ theme }) => theme.colors.muted}; }
+  b { display: block; font: 800 1.15rem ${({ theme }) => theme.fonts.display}; color: #ff8a3d; }
+  small { color: #e9c4cf; }
   ${down('md')} { opacity: 1; transform: none; padding: .6rem .3rem; b { font-size: .9rem; } small { display: none; } }
 `
 const Strip = styled.div`

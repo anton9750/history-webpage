@@ -1,19 +1,18 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HashRouter } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
 import App from './App'
-import { theme } from './styles/theme'
 import { GlobalStyle } from './styles/GlobalStyle'
 import { AuthProvider } from './context/AuthContext'
+import { ThemeModeProvider } from './context/ThemeModeContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
+    <ThemeModeProvider>
       <GlobalStyle />
       <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <AuthProvider><App /></AuthProvider>
       </HashRouter>
-    </ThemeProvider>
+    </ThemeModeProvider>
   </StrictMode>,
 )
